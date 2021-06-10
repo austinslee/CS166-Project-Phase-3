@@ -219,6 +219,8 @@ public class DBproject{
 			return;
 		}//end if
 		
+
+
 		DBproject esql = null;
 		
 		try{
@@ -281,6 +283,8 @@ public class DBproject{
 		}
 	}
 
+
+
 	public static int readChoice() {
 		int input;
 		// returns only if a correct value is given.
@@ -298,9 +302,68 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddDoctor(DBproject esql) {//1
+	//CREATE TABLE Doctor
+	//(
+	//	doctor_ID INTEGER NOT NULL,
+	//	name VARCHAR(128),
+	//	specialty VARCHAR(24),
+	//	did INTEGER NOT NULL,
+	//	PRIMARY KEY (doctor_ID),
+	//	FOREIGN KEY (did) REFERENCES Department(dept_ID)
+	//);
+		try {
+			String query = "INSERT INTO Doctor (doctor_ID, name, specialty, did) VALUES ('";
+			System.out.println("\nEnter Doctor ID: ");
+			String dID = in.readLine();
+			System.out.println("\nEnter Doctor Name: ");
+			String dName = in.readLine();
+			System.out.println("\nEnter Doctor Specialty: ");
+			String dSpecialty = in.readLine();
+                        System.out.println("\nEnter Dept ID: ");
+			String deptID = in.readLine();
+			
+			query += dID + ",'" + dName + "','" + dSpecialty + "','" + deptID + "');";
+			
+			System.out.println(query);
+			esql.executeUpdate(query);
+
+			String temp = "SELECT D.doctor_ID, D.name, D.specialty, D.did FROM Doctor D WHERE D.doctor_ID = ";
+			temp += dID + ";";
+			esql.executeQuery(temp);
+		}
+		
+		catch (Exception e) {
+			System.err.println (e.getMessage());
+		}	
 	}
 
 	public static void AddPatient(DBproject esql) {//2
+/*                try {
+                        String query = "INSERT INTO Patient (patient_ID, name, gtype, age, address, number_of_appts) VALUES ('";
+                        System.out.println("\nEnter Doctor ID: ");
+                        String dID = in.readLine();
+                        System.out.println("\nEnter Doctor Name: ");
+                        String dName = in.readLine();
+                        System.out.println("\nEnter Doctor Specialty: ");
+                        String dSpecialty = in.readLine();
+                        System.out.println("\nEnter Dept ID: ");
+                        String deptID = in.readLine();
+
+                        query += dID + ",'" + dName + "','" + dSpecialty + "','" + deptID + "');";
+
+                        System.out.println(query);
+                        esql.executeUpdate(query);
+
+                        String temp = "SELECT D.doctor_ID, D.name, D.specialty, D.did FROM Doctor D WHERE D.doctor_ID
+ = ";
+                        temp += dID + ";";
+                        esql.executeQuery(temp);
+                }
+
+                catch (Exception e) {
+                        System.err.println (e.getMessage());
+                }
+*/
 	}
 
 	public static void AddAppointment(DBproject esql) {//3
